@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stocknudge.surge.sh/
+Sitemap: https://yetiancai12.github.io/stocknudge/
