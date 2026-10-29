@@ -214,8 +214,8 @@
       </div>
       <div class="card">
         <div class="ico" aria-hidden="true">✉</div>
-        <h3>One daily email with everything that's running low</h3>
-        <p>A single digest each day covering what is about to run out—no notification spam.</p>
+        <h3>Email alert when stock runs low — no spam on quiet days.</h3>
+        <p>We email you only when something is actually running low—quiet days stay quiet.</p>
       </div>
       <div class="card">
         <div class="ico" aria-hidden="true">🔗</div>
@@ -260,7 +260,35 @@
     <footer>
       <p>© 2026 StockNudge. Built for independent sellers outside China.</p>
       <p><strong>Not affiliated with Etsy. 60-day refund.</strong></p>
+      <p><a href="privacy.html">Privacy</a> · Contact: <a href="mailto:yetiancai12@gmail.com">yetiancai12@gmail.com</a></p>
     </footer>
   </div>
+
+  <script>
+  (function () {
+    var KEY = "sn_ref";
+    var params = new URLSearchParams(window.location.search);
+    var ref = params.get("ref");
+    if (ref) {
+      try { localStorage.setItem(KEY, ref); } catch (e) {}
+    } else {
+      try { ref = localStorage.getItem(KEY); } catch (e) { ref = null; }
+    }
+    if (!ref) return;
+    if (!/^[A-Za-z0-9_.:-]{1,64}$/.test(ref)) return;
+    var links = document.querySelectorAll('a[href*="gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) {
+      try {
+        var u = new URL(links[i].href);
+        u.searchParams.set("ref", ref);
+        u.searchParams.set("utm_source", ref);
+        u.searchParams.set("utm_medium", "creator");
+        u.searchParams.set("referrer", "https://yetiancai12.github.io/stocknudge/?ref=" + encodeURIComponent(ref));
+        links[i].href = u.toString();
+      } catch (e) {}
+    }
+  })();
+  </script>
+
 </body>
 </html>
